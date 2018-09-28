@@ -1,0 +1,10 @@
+*.swp
+/composer.phar
+/composer.lock
+/output
+/cache
+/config
+/vendor
+/.idea/*
+!/.idea/php.xml
+!/.idea/runConfigurations
