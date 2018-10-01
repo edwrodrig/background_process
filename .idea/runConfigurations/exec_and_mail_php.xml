@@ -1,5 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="exec_and_mail.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" path="$PROJECT_DIR$/example/exec_and_mail.php">
-    <method v="2" />
-  </configuration>
-</component>

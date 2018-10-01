@@ -28,7 +28,8 @@ class Process
     /**
      * @var string|null
      */
-    private $mail = null;
+    private $process_result_handler_classname = '';
+
 
     public function __construct(string $base_folder, string $command) {
         $this->base_folder = $base_folder;
@@ -39,8 +40,11 @@ class Process
         $this->id = $id;
     }
 
-    public function setMail(string $mail) {
-        $this->mail = $mail;
+    public function setResultHandler(string $process_result_handler_classname) {
+        $this->process_result_handler_classname = $process_result_handler_classname;
+
+        if ( !is_subclass_of($process_result_handler_classname, ProcessResultHandler::class) )
+            $this->process_result_handler_classname = '';
     }
 
     public function getId() : string {
@@ -49,6 +53,10 @@ class Process
             $this->id = $now->format('Y-m-d_H-i-s-u');
         }
         return $this->id;
+    }
+
+    public function getCommand() : string {
+        return $this->command;
     }
 
     public function setRunning(bool $running) {
@@ -90,7 +98,10 @@ class Process
 
     public function getStdOutFilename() : string {
         return $this->getFilename('stdout');
+    }
 
+    public function getResultHandler() : string {
+        return $this->process_result_handler_classname;
     }
 
     public function getStdErrFilename() : string {
@@ -112,7 +123,7 @@ class Process
             escapeshellarg(Util::getAutoloaderScriptPath()),
             escapeshellarg($this->command),
             escapeshellarg($this->base_folder),
-            escapeshellarg($this->mail)
+            escapeshellarg($this->getResultHandler())
         );
     }
 
