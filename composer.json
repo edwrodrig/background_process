@@ -9,9 +9,6 @@
         }
     ],
     "minimum-stability" : "stable",
-    "suggest" : {
-        "nette/mail": "^2.4"
-    },
     "require": {
         "php" : "^7.2"
     },
